@@ -1,0 +1,15 @@
+body{
+      width: 500px;
+    margin: 10px auto;
+    background-image: url(../images/index/ville-port.jpg)
+}
+
+.p1{
+    color: black;
+    font-weight: bold;
+}
+
+.h1 {
+    color: lightskyblue;
+    font-weight: bold;
+}
