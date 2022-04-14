@@ -1,4 +1,5 @@
 <?php 
+
 include_once "_head_inc.php";
 require_once '_gestionBase_inc.php';
 ?>
@@ -25,17 +26,22 @@ require_once '_gestionBase_inc.php';
 <div class="form-group">
 
     Type Container 
-    <select name="numTypeContainer" id="numTypeContainer" class="form-control" placeholder="login" required="required" autocomplete="off" >
-        <?php
-        $collectionTypeContainer = obtenirTypeContainer();
-        foreach ($collectionTypeContainer as $typeContainer):
-           // A foutre dans l'option $typeContainer["numTypeContainer"]; 
+    <?php
+        $collectionTypeContainer = obtenirTypeContainer(); ?>
+
+
+        <select name="numTypeContainer" class="form-control"  required="required" autocomplete="off">
+            <?php 
+                 foreach($collectionTypeContainer as $container):
             ?>
-            <option name="numTypeContainer">
-                <?php echo $typeContainer["libelleTypeContainer"]; ?>
-            </option>
-        <?php endforeach; ?>
-    </select>
+                <option value='<?= $container["numTypeContainer"]; ?>'> 
+
+            <?= $container["libelleTypeContainer"];  
+                 endforeach;
+            ?>
+                </option>
+                </select>
+    
 
  Quantite
  <br>

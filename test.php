@@ -15,8 +15,13 @@ include_once '_gestionBase_inc.php';
 <br><br><br>
 <?php
 
-echo " code : " . $_SESSION['code'];
+echo " code : " . $_SESSION['code'] . "<br>";
 
+$codeR = obtenirCodeReservation();
+
+extract($codeR);
+
+echo $codeReservation
 ?>
 
 

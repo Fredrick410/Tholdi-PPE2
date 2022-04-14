@@ -31,14 +31,6 @@ include_once"_head_inc.php";
 
 
 
-
-
-
-
-
-
-
-
 <!-- Deuxieme page de présentation !-->     
 
 <div>

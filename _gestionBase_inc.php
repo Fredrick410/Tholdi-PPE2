@@ -91,7 +91,7 @@ function obtenirVille()
 function obtenirTypeContainer()
 {
   $pdo = gestionnaireDeConnexion();
-  $requetePrep = "SELECT libelleTypeContainer FROM typecontainer";
+  $requetePrep = "SELECT numTypeContainer, libelleTypeContainer FROM typecontainer";
   $requete = $pdo->prepare($requetePrep);
   $requete->execute();
   $insert = $requete->fetchAll();
@@ -146,16 +146,37 @@ WHERE codeReservation = 70 and codeUtilisateur = 1; */
 
 
 
-/*Fait par le prof*/
-function ajouterLigneDeReservation($numTypeContainer,$qteReserver)
-{
+function obtenirCodeReservation(){
+
     $pdo = gestionnaireDeConnexion();
-    $req = "INSERT INTO reserver (numTypeContainer,qteReserver) VALUES (:numTypeContainer, :qteReserver)";
+    $codeUtilisateur= $_SESSION['code'];
+    $sql = "SELECT codeReservation FROM reservation WHERE codeUtilisateur = :code ORDER BY codeReservation DESC LIMIT 1";
+    $stmt = $pdo->prepare($sql);
+    $stmt->execute([
+        "code" => $codeUtilisateur
+    ]);
+
+    $codeRes = $stmt->fetch();
+    extract($codeRes);
+
+    return $codeRes;
+}
+
+
+function ajouterLigneDeReservation($numTypeContainer, $qteReserver)
+{
+    $codeR = obtenirCodeReservation();
+    extract($codeR);
+ 
+    $pdo = gestionnaireDeConnexion();
+    $req = "INSERT INTO reserver (codeReservation, numTypeContainer,qteReserver) VALUES (:codeReservation, :numTypeContainer, :qteReserver)";
     $requete = $pdo->prepare($req);
     $requete->execute([ 
+      "codeReservation" => $codeReservation,
       "numTypeContainer" => $numTypeContainer,
       "qteReserver" => $qteReserver
     ]);
+
     $insert = $requete->fetchAll();
     return $insert;
 }
